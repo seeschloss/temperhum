@@ -332,7 +332,8 @@ read_interrupt_transfer_temperature(libusb_device_handle *handle)
      * SHT1x method: https://github.com/edorfaus/TEMPered/wiki/SHT1x
      */
     temp = ((signed char)answer[2] << 8) + ((unsigned char)answer[3] && 0xFF);
-    tempC2 = -39.7 + 0.01 * temp;
+    //tempC2 = -39.7 + 0.01 * temp;
+    tempC2 = temp / 32.0 - 50;
 
     rh = ((answer[4] & 0xFF) << 8) + (answer[5] & 0xFF);
     relhum = -2.0468 + 0.0367 * rh - 1.5955e-6 * rh * rh;
